@@ -7,7 +7,7 @@ use Error;
 
 Class Password 
 {
-    private int $lenth;
+    private int $length;
     private bool $numbers;
     private bool $symbols;
     private bool $includeLowerCase;
@@ -15,13 +15,13 @@ Class Password
     private string $password;
 
     function __construct (
-        int $lenth,
+        int $length,
         bool $numbers,
         bool $symbols,
         bool $includeLowerCase,
         bool $includeUpperCase
     ){
-        $this->lenth = $lenth;
+        $this->length = $length;
         $this->numbers = $numbers;
         $this->symbols = $symbols;
         $this->includeLowerCase = $includeLowerCase;
@@ -44,19 +44,34 @@ Class Password
             return 'A senha precisa ter no mínimo caracteres minúsculos ou maiúsculos';
         }
 
+        $caracteres = '';
+
+        if($this->numbers){
+            $caracteres .= '0123456789';
+        }
+        if ($this->symbols) {
+            $caracteres .= '!@#$%^&*()-_=+[]{}<>?';
+        }
+        if ($this->includeLowerCase) {
+            $caracteres .= 'abcdefghijklmnopqrstuvwxyz';
+        }
+        if ($this->includeUpperCase) {
+            $caracteres .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        }
 
 
-        return "123";
+        //str_repeat Vai repetir os caracteres até que tenham o tamanho desejado.
+        //str_shuffle Vai embaralhar a ordem dos caracteres 
+        //substr Vai "Cortar" a senha no tamanho desejado, o 0 é para definir apartir de qual caractere irá iniciar a contagem.
+
+        $this->password = substr(str_shuffle(str_repeat($caracteres, $this->length)), 0, $this->length);
+
+        return $this->password;
     }
 
 
 
 }
-
-
-
-//Criar a função para criar a senha, de acordo com os requisitos instanciados no inde;
-//Criar os getters e setters;
 
 ?>
 
