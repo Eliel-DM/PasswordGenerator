@@ -5,14 +5,13 @@ require __DIR__ . '/../vendor/autoload.php';
 use App\Models\Password;
 
 $testingPassword = new Password (
-  12,
-  false,
-  false,
-  false,
-  false
+  12, //tamanho da senha 
+  false, // números 
+  false, // Símbolos 
+  false, // Letras minúsculas 
+  false //  Letras maiúsculas
 );
 
 
-//$varName->functionPasswordCreate(PRECISA RECEBER UM OBJETO DE PASSWORD, a função se vira para gerir a lógica);
+printf($testingPassword->generatePassword()." \n");
 
-printf("Objeto criado com sucesso! \n");

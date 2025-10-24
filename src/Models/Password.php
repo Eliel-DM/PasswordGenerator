@@ -3,6 +3,8 @@
 declare (strict_types=1);
 namespace App\Models;
 
+use Error;
+
 Class Password 
 {
     private int $lenth;
@@ -12,7 +14,7 @@ Class Password
     private bool $includeUpperCase;
     private string $password;
 
-    function __contruct (
+    function __construct (
         int $lenth,
         bool $numbers,
         bool $symbols,
@@ -25,6 +27,29 @@ Class Password
         $this->includeLowerCase = $includeLowerCase;
         $this->includeUpperCase = $includeUpperCase;
 }
+
+
+    public function minimumPasswordRequeriments () : bool
+    {
+         if(!$this->includeLowerCase && !$this->includeUpperCase){
+            return false;
+        }
+        return true;
+    }
+
+    
+    public function generatePassword() : string
+    {
+        if(!$this->minimumPasswordRequeriments()){
+            return 'A senha precisa ter no mínimo caracteres minúsculos ou maiúsculos';
+        }
+
+
+
+        return "123";
+    }
+
+
 
 }
 
